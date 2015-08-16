@@ -13,7 +13,8 @@
 		F64865AC1B7788ED009211AC /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F64865AA1B7788ED009211AC /* MainMenu.xib */; };
 		F64865B81B7788ED009211AC /* gifCastTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F64865B71B7788ED009211AC /* gifCastTests.m */; };
 		F64865F81B77B2E1009211AC /* ScreenCaptureSession.m in Sources */ = {isa = PBXBuildFile; fileRef = F64865F71B77B2E1009211AC /* ScreenCaptureSession.m */; };
-		F64865FA1B77BBBC009211AC /* AVScreenShack in Resources */ = {isa = PBXBuildFile; fileRef = F64865F91B77BBBC009211AC /* AVScreenShack */; };
+		F6A62F521B7B49FA007165A9 /* ScreenAreaSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A62F511B7B49FA007165A9 /* ScreenAreaSelector.m */; };
+		F6E036A91B80AB90007C687D /* SelectionRectangle.m in Sources */ = {isa = PBXBuildFile; fileRef = F6E036A81B80AB90007C687D /* SelectionRectangle.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +40,10 @@
 		F64865B71B7788ED009211AC /* gifCastTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = gifCastTests.m; sourceTree = "<group>"; };
 		F64865F61B77B2E1009211AC /* ScreenCaptureSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenCaptureSession.h; sourceTree = "<group>"; };
 		F64865F71B77B2E1009211AC /* ScreenCaptureSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenCaptureSession.m; sourceTree = "<group>"; };
-		F64865F91B77BBBC009211AC /* AVScreenShack */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AVScreenShack; sourceTree = "<group>"; };
+		F6A62F501B7B49FA007165A9 /* ScreenAreaSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenAreaSelector.h; sourceTree = "<group>"; };
+		F6A62F511B7B49FA007165A9 /* ScreenAreaSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenAreaSelector.m; sourceTree = "<group>"; };
+		F6E036A71B80AB90007C687D /* SelectionRectangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionRectangle.h; sourceTree = "<group>"; };
+		F6E036A81B80AB90007C687D /* SelectionRectangle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionRectangle.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,14 +85,14 @@
 		F64865A01B7788ED009211AC /* gifCast */ = {
 			isa = PBXGroup;
 			children = (
+				F6E036A61B80AB67007C687D /* Gif Converter */,
+				F6E036A51B80AB5A007C687D /* Screen Capture */,
+				F6E036A41B80AB38007C687D /* Area Selector */,
 				F64865A31B7788ED009211AC /* AppDelegate.h */,
 				F64865A41B7788ED009211AC /* AppDelegate.m */,
 				F64865A81B7788ED009211AC /* Images.xcassets */,
 				F64865AA1B7788ED009211AC /* MainMenu.xib */,
 				F64865A11B7788ED009211AC /* Supporting Files */,
-				F64865F61B77B2E1009211AC /* ScreenCaptureSession.h */,
-				F64865F71B77B2E1009211AC /* ScreenCaptureSession.m */,
-				F64865F91B77BBBC009211AC /* AVScreenShack */,
 			);
 			path = gifCast;
 			sourceTree = "<group>";
@@ -117,6 +121,33 @@
 				F64865B61B7788ED009211AC /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F6E036A41B80AB38007C687D /* Area Selector */ = {
+			isa = PBXGroup;
+			children = (
+				F6A62F501B7B49FA007165A9 /* ScreenAreaSelector.h */,
+				F6A62F511B7B49FA007165A9 /* ScreenAreaSelector.m */,
+				F6E036A71B80AB90007C687D /* SelectionRectangle.h */,
+				F6E036A81B80AB90007C687D /* SelectionRectangle.m */,
+			);
+			name = "Area Selector";
+			sourceTree = "<group>";
+		};
+		F6E036A51B80AB5A007C687D /* Screen Capture */ = {
+			isa = PBXGroup;
+			children = (
+				F64865F61B77B2E1009211AC /* ScreenCaptureSession.h */,
+				F64865F71B77B2E1009211AC /* ScreenCaptureSession.m */,
+			);
+			name = "Screen Capture";
+			sourceTree = "<group>";
+		};
+		F6E036A61B80AB67007C687D /* Gif Converter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Gif Converter";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,7 +230,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F64865A91B7788ED009211AC /* Images.xcassets in Resources */,
-				F64865FA1B77BBBC009211AC /* AVScreenShack in Resources */,
 				F64865AC1B7788ED009211AC /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -219,6 +249,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F64865A71B7788ED009211AC /* main.m in Sources */,
+				F6E036A91B80AB90007C687D /* SelectionRectangle.m in Sources */,
+				F6A62F521B7B49FA007165A9 /* ScreenAreaSelector.m in Sources */,
 				F64865F81B77B2E1009211AC /* ScreenCaptureSession.m in Sources */,
 				F64865A51B7788ED009211AC /* AppDelegate.m in Sources */,
 			);
@@ -410,6 +442,7 @@
 				F64865BD1B7788ED009211AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F64865BE1B7788ED009211AC /* Build configuration list for PBXNativeTarget "gifCastTests" */ = {
 			isa = XCConfigurationList;
@@ -418,6 +451,7 @@
 				F64865C01B7788ED009211AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

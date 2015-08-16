@@ -9,16 +9,18 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
+typedef void (^CompleteVideoSession)(NSURL* file);
+
 @interface ScreenCaptureSession : NSObject <AVCaptureFileOutputRecordingDelegate> 
 
+@property (copy, nonatomic) CompleteVideoSession completeVideoSession;
 
-@property (strong) AVCaptureSession *captureSession;
-@property (strong) AVCaptureScreenInput *captureScreenInput;
 
-- (void)startRecording;
+- (void)startRecording:(NSURL *)destPath forRect:(NSRect)recordRect onFinish:(void (^)(NSURL* file))finishBlock;
+
+
 - (void)stopRecording;
 
 
-- (BOOL)createScreenCaptureSession:(NSURL *)file;
 
 @end

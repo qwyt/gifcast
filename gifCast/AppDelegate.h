@@ -12,10 +12,10 @@
 @property (strong, nonatomic) IBOutlet NSMenu *statusMenu;
 @property (strong, nonatomic) NSStatusItem *statusItem;
 
+- (IBAction)captureScreenSaveDialog:(id)sender;
+- (IBAction)captureScreenStop:(id)sender;
 
-- (IBAction)captureScreen:(id)sender;
 
-@property (copy) NSURL*    file;
 
 @end
 

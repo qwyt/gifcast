@@ -8,15 +8,27 @@
 
 #import "AppDelegate.h"
 #import "ScreenCaptureSession.h"
+#import "ScreenAreaSelector.h"
 
-@interface AppDelegate ()
+@interface AppDelegate (){
+    
+    ScreenAreaSelector* screenAreaSelector;
+    
+    NSMenuItem *captureMenuItem;
+    
+    ScreenCaptureSession *captureSession;
+}
 
 @property (weak) IBOutlet NSWindow *window;
 @end
 
 
 
-@implementation AppDelegate
+@implementation AppDelegate{
+    
+    BOOL capturing;
+    
+}
 
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
@@ -37,6 +49,9 @@
 
 - (IBAction)saveFile:(id)sender {
     
+    
+    [self captureScreenPrepare];
+    
     // create the save panel
     NSSavePanel *panel = [NSSavePanel savePanel];
     
@@ -46,51 +61,111 @@
     // display the panel
     [panel beginWithCompletionHandler:^(NSInteger result) {
         
+        
         if (result == NSFileHandlingPanelOKButton) {
             
-            // create a file namaner and grab the save panel's returned URL
-        //    NSFileManager *manager = [NSFileManager defaultManager];
             NSURL *saveURL = [panel URL];
             
-            //assign it to file variable
-            self.file = saveURL;
-            
-            ScreenCaptureSession* screenCaptureSession = [[ScreenCaptureSession alloc]init];
-
-            [screenCaptureSession createScreenCaptureSession:(self.file)];
-            [screenCaptureSession startRecording];
-            
-            [NSTimer scheduledTimerWithTimeInterval:2.0
-                                             target:self
-                                           selector:@selector(stopRecording:)
-                                           userInfo:screenCaptureSession
-                                            repeats:NO];
-
+     
+            [self captureScreen:saveURL];
+    
+        
             
         }
+        else{
+            
+            [self captureScreenReset];
+        }
+    
     }];
 }
 
 
--(void)stopRecording:(NSTimer*) timer{
-    
-    ScreenCaptureSession *session =  (ScreenCaptureSession*)[timer userInfo];
-    [session stopRecording];
-    
-}
 
  // end doSaveAs
 
 //screen capture
 
-- (IBAction)captureScreen:(id)sender {
+//called to open save dialog
+- (IBAction)captureScreenSaveDialog:(id)sender {
+    
+    if( captureMenuItem == nil)
+        captureMenuItem = (NSMenuItem*) sender; //save button
+    
     
     [self saveFile:(sender)];
-
-//    ScreenCaptureSession* screenCaptureSession = [[ScreenCaptureSession init]alloc];
-    
+        
 
 }
+
+//called to stop screan capture after session has been created
+- (IBAction)captureScreenStop:(id)sender {
+
+    capturing = NO;
+    
+    //if recording alreayd started stop it & procced
+    if (captureSession != nil){
+        
+        NSLog(@"captureScreenStop:SESSION");
+        
+        [captureSession stopRecording];
+    }
+    //otherwise just reset menu item
+    else{
+        NSLog(@"captureScreenStop:Reset");
+        [self captureScreenReset];
+    }
+    
+}
+
+//called to disabled menuItem while save dialog is opened
+- (void)captureScreenPrepare{
+    
+    [captureMenuItem setEnabled:NO];
+}
+
+//called to create a capture session after an url is know
+- (void)captureScreen:(NSURL*)saveURL{
+    
+    capturing = YES;
+    
+    screenAreaSelector =  [[ScreenAreaSelector alloc]initSession:saveURL];
+    
+    [captureMenuItem setEnabled:YES];
+    [captureMenuItem setAction:@selector(captureScreenStop:)];
+    [captureMenuItem setTitle:@"Stop"];
+    
+    //wait untill recording rect is selected then start recording
+    [screenAreaSelector getRecordingAreaRect:^(NSRect rect) {
+        
+        NSLog(@"WWWWWW -   WWWWW   _  WWWWWW %@", NSStringFromRect(rect));
+        [screenAreaSelector close];
+        
+        captureSession = [[ScreenCaptureSession alloc]init];
+        
+        
+        //create a recording session, procces file on completion
+        [captureSession startRecording:saveURL forRect:rect onFinish:^(NSURL *file) {
+            
+            NSLog(@"@video recorded, saved at : %@ ", [file absoluteString]);
+        }];
+        
+        //[captureSession startRecording:saveURL forRect:rect]
+        
+    }];
+}
+
+//called to reset menuItem to original state
+- (void)captureScreenReset{
+    
+    capturing = NO;
+    
+    [captureMenuItem setEnabled:YES];
+    [captureMenuItem setAction:@selector(captureScreenSaveDialog:)];
+    [captureMenuItem setTitle:@"Capture"];
+    
+}
+
 
 
 @end

@@ -10,80 +10,102 @@
 #import <AVFoundation/AVFoundation.h>
 
 
-
 @implementation ScreenCaptureSession{
-
-    CGDirectDisplayID           display;
-    AVCaptureMovieFileOutput    *captureMovieFileOutput;
-    NSMutableArray              *shadeWindows;
-    NSURL *captureFile;
+@private
+    AVCaptureSession *mSession;
+    AVCaptureMovieFileOutput *mMovieFileOutput;
+    NSTimer *mTimer;
+    
+    NSURL *destinationPath;
 }
 
-- (BOOL)createScreenCaptureSession :(NSURL*)file
-{
-    
-    captureFile = file;
-    
-    /* Create a capture session. */
-    self.captureSession = [[AVCaptureSession alloc] init];
-    if ([self.captureSession canSetSessionPreset:AVCaptureSessionPresetHigh])
-    {
-        /* Specifies capture settings suitable for high quality video and audio output. */
-        [self.captureSession setSessionPreset:AVCaptureSessionPresetHigh];
-    }
-    
-    /* Add the main display as a capture input. */
-    display = CGMainDisplayID();
-    self.captureScreenInput = [[AVCaptureScreenInput alloc] initWithDisplayID:display];
-    if ([self.captureSession canAddInput:self.captureScreenInput])
-    {
-        [self.captureSession addInput:self.captureScreenInput];
-    }
-    else
-    {
-        return NO;
-    }
-    
-    /* Add a movie file output + delegate. */
-    captureMovieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
-    [captureMovieFileOutput setDelegate:self];
-    if ([self.captureSession canAddOutput:captureMovieFileOutput])
-    {
-        [self.captureSession addOutput:captureMovieFileOutput];
-    }
-    else
-    {
-        return NO;
-    }
-    
-    /* Register for notifications of errors during the capture session so we can display an alert. */
-  //  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(captureSessionRuntimeErrorDidOccur:) name:AVCaptureSessionRuntimeErrorNotification object:self.captureSession];
-    
-    return YES;
-}
 
-/* Called when the user presses the 'Start' button to start a recording. */
-- (void)startRecording
+- (void)startRecording:(NSURL *)destPath forRect:(NSRect)recordRect onFinish:(void (^)(NSURL* file))finishBlock
 {
-    NSLog(@"Minimum Frame Duration: %f, Crop Rect: %@, Scale Factor: %f, Capture Mouse Clicks: %@, Capture Mouse Cursor: %@, Remove Duplicate Frames: %@",
-          CMTimeGetSeconds([self.captureScreenInput minFrameDuration]),
-          NSStringFromRect(NSRectFromCGRect([self.captureScreenInput cropRect])),
-          [self.captureScreenInput scaleFactor],
-          [self.captureScreenInput capturesMouseClicks] ? @"Yes" : @"No",
-          [self.captureScreenInput capturesCursor] ? @"Yes" : @"No",
-          [self.captureScreenInput removesDuplicateFrames] ? @"Yes" : @"No");
+    self.completeVideoSession = finishBlock;
     
+    NSLog((@"startRecording:ScreenCaptureSession"));
+    
+    destinationPath = destPath;
+    
+    
+    
+    // Create a capture session
+    mSession = [[AVCaptureSession alloc] init];
+    
+    mSession.sessionPreset = AVCaptureSessionPreset1280x720;
+    
+    
+    //select correct display TODO
+    CGDirectDisplayID displayId = kCGDirectMainDisplay;
+    
+    AVCaptureScreenInput *input = [[AVCaptureScreenInput alloc] initWithDisplayID:displayId];
+    
+    [input setCropRect:recordRect];
+    
+    if (!input) {
+        mSession = nil;
+        return;
+    }
+    
+    if ([mSession canAddInput:input])
+        [mSession addInput:input];
+    
+    // Create a MovieFileOutput and add it to the session
+    mMovieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
+    if ([mSession canAddOutput:mMovieFileOutput])
+        [mSession addOutput:mMovieFileOutput];
+    
+    [mSession startRunning];
+    
+    // Delete any existing movie file first
+    if ([[NSFileManager defaultManager] fileExistsAtPath:[destPath path]])
+    {
+        NSError *err;
+        if (![[NSFileManager defaultManager] removeItemAtPath:[destPath path] error:&err])
+        {
+            NSLog(@"Error deleting existing movie %@",[err localizedDescription]);
+        }
+    }
+    
+    // Start recording to the destination movie file
+    // The destination path is assumed to end with ".mov", for example, @"/users/master/desktop/capture.mov"
+    // Set the recording delegate to self
+    [mMovieFileOutput startRecordingToOutputFileURL:destPath recordingDelegate:self];
 
-        /* Starts recording to a given URL. */
-  //      [captureMovieFileOutput startRecordingToOutputFileURL:captureFile recordingDelegate:self];
+    
+    
+ //   mTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(stopRecording:) userInfo:nil repeats:NO];
 }
 
 
 /* Called when the user presses the 'Stop' button to stop a recording. */
-- (void)stopRecording;
+- (void)stopRecording
 {
     NSLog((@"stopRecording"));
-//    [captureMovieFileOutput stopRecording];
+    
+    [mMovieFileOutput stopRecording];
+    
+    NSLog((@"completeVideoSession"));
+    
+    NSLog(@"destinationPath: %@", [destinationPath absoluteString]);
+    
+    self.completeVideoSession( destinationPath );
+    
+}
+
+// AVCaptureFileOutputRecordingDelegate methods
+
+- (void)captureOutput:(AVCaptureFileOutput *)captureOutput didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL fromConnections:(NSArray *)connections error:(NSError *)error
+{
+    NSLog(@"Did finish recording to %@ due to error %@", [outputFileURL description], [error description]);
+    
+    // Stop running the session
+    [mSession stopRunning];
+    
+    // Release the session
+   // [mSession release];
+    mSession = nil;
 }
 
 @end
