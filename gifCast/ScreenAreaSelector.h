@@ -27,7 +27,7 @@ typedef void (^CompleteRecordingAreaSelection)(NSRect rect);
 
 @property (copy, nonatomic) CompleteRecordingAreaSelection completeRecordingAreaSelection;
 
-- (void)getRecordingAreaRect:(void (^)(NSRect rect))finishBlock;
+- (void)getRecordingAreaRect:(BOOL)fullScreen:(void (^)(NSRect rect))finishBlock;
 
 
 @end

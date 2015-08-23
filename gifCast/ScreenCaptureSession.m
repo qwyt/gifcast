@@ -20,11 +20,14 @@
 }
 
 
-- (void)startRecording:(NSURL *)destPath forRect:(NSRect)recordRect onFinish:(void (^)(NSURL* file))finishBlock
+- (void)startRecording:(NSURL *)destPathOrig forRect:(NSRect)recordRect onFinish:(void (^)(NSURL* file))finishBlock
 {
     self.completeVideoSession = finishBlock;
     
     NSLog((@"startRecording:ScreenCaptureSession"));
+    
+    //copy destPath, for whatever reason
+    NSURL* destPath = [[NSURL alloc]initFileURLWithPath:[destPathOrig path]];
     
     destinationPath = destPath;
     
@@ -33,7 +36,7 @@
     // Create a capture session
     mSession = [[AVCaptureSession alloc] init];
     
-    mSession.sessionPreset = AVCaptureSessionPreset1280x720;
+    mSession.sessionPreset = AVCaptureSessionPresetPhoto;
     
     
     //select correct display TODO
@@ -57,6 +60,8 @@
         [mSession addOutput:mMovieFileOutput];
     
     [mSession startRunning];
+    
+    NSLog(@"Real mov record path: %@", destPath);
     
     // Delete any existing movie file first
     if ([[NSFileManager defaultManager] fileExistsAtPath:[destPath path]])
@@ -90,7 +95,7 @@
     
     NSLog(@"destinationPath: %@", [destinationPath absoluteString]);
     
-    self.completeVideoSession( destinationPath );
+    
     
 }
 
@@ -106,6 +111,8 @@
     // Release the session
    // [mSession release];
     mSession = nil;
+    
+    self.completeVideoSession( outputFileURL );
 }
 
 @end

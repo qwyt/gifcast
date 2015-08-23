@@ -65,11 +65,17 @@
 //----
 
 
-- (void)getRecordingAreaRect:(void (^)(NSRect rect))finishBlock{
+- (void)getRecordingAreaRect: (BOOL)fullScreen :(void (^)(NSRect rect))finishBlock{
 
     NSLog(@"startSelection:ScreenAreaSelector");
     
     self.completeRecordingAreaSelection = finishBlock;
+    
+    if(fullScreen){
+        
+        self.completeRecordingAreaSelection( [[NSScreen mainScreen] frame] );
+        return;
+    }
     
     __block NSRect selectedRect;
     
@@ -87,10 +93,7 @@
 
 }
 
--(void)stopSelection{
-    
-    
-}
+
 
 //--Mouse Events---
 

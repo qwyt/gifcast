@@ -13,26 +13,171 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
             <connections>
+                <outlet property="aboutWindow" destination="csM-1z-mNc" id="f8L-fq-hpf"/>
+                <outlet property="captureMenuHolder" destination="qQh-JN-0cn" id="P0e-f6-stB"/>
+                <outlet property="convertingLabel" destination="BKd-yl-RKK" id="HF9-Lq-ehW"/>
+                <outlet property="linkDropboxAccountButton" destination="uBR-pq-Wl9" id="OiK-Hy-Mpe"/>
+                <outlet property="progressBar" destination="oKA-Rm-REY" id="GI3-xW-siu"/>
+                <outlet property="saveLocallyButton" destination="P3u-tO-VpG" id="aQJ-vw-9jn"/>
+                <outlet property="saveToDropboxButton" destination="LWl-Va-y0O" id="ujj-VB-1RS"/>
+                <outlet property="settingsWindow" destination="I7F-gA-5Eb" id="jn3-EO-1SF"/>
                 <outlet property="statusMenu" destination="2eL-2T-Uvq" id="bgf-pd-EkS"/>
+                <outlet property="stopCaptureMenuItem" destination="7zH-js-EIg" id="1sw-Dh-7DG"/>
+                <outlet property="viewerImageView" destination="39B-bL-SGw" id="cqJ-79-OGE"/>
+                <outlet property="viewerWindow" destination="fcL-Ea-A0E" id="emZ-Iu-Bzi"/>
             </connections>
         </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <menu autoenablesItems="NO" id="2eL-2T-Uvq">
             <items>
-                <menuItem title="Capture" id="Ub7-Nj-mA3">
+                <menuItem title="Stop" hidden="YES" enabled="NO" id="7zH-js-EIg">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="captureScreenSaveDialog:" target="Voe-Tx-rLC" id="N5H-xe-voh"/>
-                    </connections>
+                </menuItem>
+                <menuItem title="Capture" id="qQh-JN-0cn" userLabel="Capture">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Capture" id="gU5-VO-2eS" userLabel="Submenu">
+                        <items>
+                            <menuItem title="Select" id="xa3-sH-7OB" userLabel="Select">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="prepareCaptureSessionSelect:" target="Voe-Tx-rLC" id="G3Y-lM-ayQ"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Entire Screen" id="CRv-OO-8vV" userLabel="Fullscreen">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="prepareCaptureSessionFull:" target="Voe-Tx-rLC" id="Hrt-bl-Dmn"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
                 </menuItem>
                 <menuItem title="About" id="xZH-9q-Xcp">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="showAboutWindow:" target="Voe-Tx-rLC" id="9qS-i8-WJ8"/>
+                    </connections>
                 </menuItem>
+                <menuItem title="Settings" id="1YE-eD-Wto">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="showSettingsWindow:" target="Voe-Tx-rLC" id="MnJ-Fc-uG8"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="Qfk-wo-zVh"/>
                 <menuItem title="Exit" id="RiL-Tx-8tV">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="closeApp:" target="Voe-Tx-rLC" id="Uyd-2e-tlb"/>
+                    </connections>
                 </menuItem>
             </items>
             <point key="canvasLocation" x="334" y="407.5"/>
         </menu>
+        <window title="About" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" id="csM-1z-mNc" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="501" y="232" width="346" height="395"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <value key="minSize" type="size" width="346" height="395"/>
+            <value key="maxSize" type="size" width="346" height="395"/>
+            <view key="contentView" id="PqX-N1-ZeF">
+                <rect key="frame" x="0.0" y="0.0" width="346" height="395"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nih-TW-ntz">
+                        <rect key="frame" x="10" y="20" width="318" height="64"/>
+                        <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="Source Code Avaialble at  : https://github.com/qwyt/gifcast" id="6w8-9I-5to">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="692" y="272.5"/>
+        </window>
+        <window title="Settings" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" id="I7F-gA-5Eb">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="131" y="158" width="377" height="445"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <view key="contentView" id="86G-WW-cKw">
+                <rect key="frame" x="0.0" y="-6" width="377" height="445"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uBR-pq-Wl9">
+                        <rect key="frame" x="185" y="13" width="178" height="32"/>
+                        <buttonCell key="cell" type="push" title="Link Dropbox Account" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Dsn-7t-QdT">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="linkDropboxAccount:" target="Voe-Tx-rLC" id="dln-is-x19"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="260.5" y="40.5"/>
+        </window>
+        <window title="Viewer" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="fcL-Ea-A0E" userLabel="Viewer">
+            <windowStyleMask key="styleMask" titled="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="415" y="203" width="570" height="458"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <value key="minSize" type="size" width="525" height="450"/>
+            <view key="contentView" wantsLayer="YES" id="Hhm-Vc-ISJ">
+                <rect key="frame" x="0.0" y="-3" width="570" height="458"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LWl-Va-y0O">
+                        <rect key="frame" x="367" y="380" width="144" height="32"/>
+                        <buttonCell key="cell" type="push" title="Save to Dropbox" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="apc-ky-eOE">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="saveToDropboxAction:" target="Voe-Tx-rLC" id="42A-sT-Xs3"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P3u-tO-VpG">
+                        <rect key="frame" x="188" y="13" width="144" height="32"/>
+                        <buttonCell key="cell" type="push" title="Save locally" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fYM-Ui-B6n">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="saveLocallyAction:" target="Voe-Tx-rLC" id="XXR-wX-g3g"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uc9-Mm-hvL">
+                        <rect key="frame" x="23" y="13" width="144" height="32"/>
+                        <buttonCell key="cell" type="push" title="Discard" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Gsy-TK-kfk">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="viewerDiscardImage:" target="Voe-Tx-rLC" id="nvU-D1-sfN"/>
+                        </connections>
+                    </button>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BKd-yl-RKK">
+                        <rect key="frame" x="240" y="241" width="98" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Converting..." placeholderString="Converting..." id="HMU-X2-WiK">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <progressIndicator fixedFrame="YES" maxValue="100" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="oKA-Rm-REY">
+                        <rect key="frame" x="269" y="266" width="32" height="32"/>
+                    </progressIndicator>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="39B-bL-SGw">
+                        <rect key="frame" x="20" y="61" width="530" height="377"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyUpOrDown" id="nm4-Bg-HeB"/>
+                    </imageView>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="1559" y="-70"/>
+        </window>
     </objects>
 </document>
