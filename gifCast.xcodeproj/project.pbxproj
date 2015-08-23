@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F64317651B81DBAE002F1B83 /* ffmpeg in Resources */ = {isa = PBXBuildFile; fileRef = F64317641B81DBAE002F1B83 /* ffmpeg */; };
 		F64865A51B7788ED009211AC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F64865A41B7788ED009211AC /* AppDelegate.m */; };
 		F64865A71B7788ED009211AC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F64865A61B7788ED009211AC /* main.m */; };
 		F64865A91B7788ED009211AC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F64865A81B7788ED009211AC /* Images.xcassets */; };
@@ -19,6 +18,7 @@
 		F6A62F521B7B49FA007165A9 /* ScreenAreaSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A62F511B7B49FA007165A9 /* ScreenAreaSelector.m */; };
 		F6E036A91B80AB90007C687D /* SelectionRectangle.m in Sources */ = {isa = PBXBuildFile; fileRef = F6E036A81B80AB90007C687D /* SelectionRectangle.m */; };
 		F6ED735A1B89CFAD0038EE97 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6ED73591B89CFAD0038EE97 /* Quartz.framework */; };
+		F6ED735E1B89F3780038EE97 /* ffmpeg in Resources */ = {isa = PBXBuildFile; fileRef = F6ED735D1B89F3780038EE97 /* ffmpeg */; };
 		F6F7DAC41B845F1A00B336FF /* DropboxManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F7DAC31B845F1A00B336FF /* DropboxManager.m */; };
 		F6F7DB6D1B846FA500B336FF /* DropboxOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6F7DB6C1B846FA500B336FF /* DropboxOSX.framework */; };
 		F6F7DB6F1B846FBC00B336FF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6F7DB6E1B846FBC00B336FF /* Security.framework */; };
@@ -37,7 +37,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		F64317641B81DBAE002F1B83 /* ffmpeg */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = ffmpeg; path = ffmpeg/ffmpeg; sourceTree = "<group>"; };
 		F648659E1B7788ED009211AC /* gifCast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gifCast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F64865A21B7788ED009211AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F64865A31B7788ED009211AC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -59,6 +58,7 @@
 		F6E036A71B80AB90007C687D /* SelectionRectangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionRectangle.h; sourceTree = "<group>"; };
 		F6E036A81B80AB90007C687D /* SelectionRectangle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionRectangle.m; sourceTree = "<group>"; };
 		F6ED73591B89CFAD0038EE97 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		F6ED735D1B89F3780038EE97 /* ffmpeg */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = ffmpeg; sourceTree = SOURCE_ROOT; };
 		F6F7DAC21B845F1A00B336FF /* DropboxManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxManager.h; sourceTree = "<group>"; };
 		F6F7DAC31B845F1A00B336FF /* DropboxManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxManager.m; sourceTree = "<group>"; };
 		F6F7DB6C1B846FA500B336FF /* DropboxOSX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxOSX.framework; sourceTree = "<group>"; };
@@ -126,7 +126,7 @@
 		F64865A11B7788ED009211AC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				F64317641B81DBAE002F1B83 /* ffmpeg */,
+				F6ED735D1B89F3780038EE97 /* ffmpeg */,
 				F64865A21B7788ED009211AC /* Info.plist */,
 				F64865A61B7788ED009211AC /* main.m */,
 			);
@@ -269,10 +269,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6ED735E1B89F3780038EE97 /* ffmpeg in Resources */,
 				F6F7DB711B84703100B336FF /* DropboxOSX.framework in Resources */,
 				F6F7DB701B84702E00B336FF /* Security.framework in Resources */,
 				F64865A91B7788ED009211AC /* Images.xcassets in Resources */,
-				F64317651B81DBAE002F1B83 /* ffmpeg in Resources */,
 				F64865AC1B7788ED009211AC /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
