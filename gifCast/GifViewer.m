@@ -19,16 +19,16 @@
     NSProgressIndicator* progressIndicator;
     NSTextField* convertingText;
     
-    DropboxManager* dropboxManager;
+  //  DropboxManager* dropboxManager;
     
     
 }
 
-- (id) initWithSettings:(NSWindow*)window viewerImage:(NSImageView*)imageView dropboxManager:(DropboxManager*)dropboxManager  progressBar:(NSProgressIndicator*)progressBar convertingTextField:(NSTextField*)convertingTextField {
+- (id) initWithSettings:(NSWindow*)window viewerImage:(NSImageView*)imageView   progressBar:(NSProgressIndicator*)progressBar convertingTextField:(NSTextField*)convertingTextField {
     
     self = [super init];
     
-    self -> dropboxManager = dropboxManager;
+//    self -> dropboxManager = dropboxManager;
     
     self -> imageView = imageView;
     self -> window = window;
@@ -79,7 +79,7 @@
 
 -(void)saveToDropbox{
    
-    [dropboxManager saveFile:tempFile];
+//    [dropboxManager saveFile:tempFile];
     // [self hideViewer:NO];
 }
 -(void)saveLocally{

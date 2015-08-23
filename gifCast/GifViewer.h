@@ -10,7 +10,7 @@
 #import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
 #import "AppDelegate.h"
-#import "DropboxManager.h"
+//#import "DropboxManager.h"
 
 @import Quartz;
 
@@ -22,7 +22,7 @@ typedef void (^CompleteViewerSession)(BOOL saveLocally);
 
 
 //
-- (id) initWithSettings:(NSWindow*)window viewerImage:(NSImageView*)imageView dropboxManager:(DropboxManager*)dropboxManager  progressBar:(NSProgressIndicator*)progressBar convertingTextField:(NSTextField*)convertingTextField;
+- (id) initWithSettings:(NSWindow*)window viewerImage:(NSImageView*)imageView   progressBar:(NSProgressIndicator*)progressBar convertingTextField:(NSTextField*)convertingTextField;
     
 - (void)getResponseAfterCompletion:(void (^)(BOOL saveLocally))finishBlock;
 -(void)showImage:(NSURL*)tempFile;

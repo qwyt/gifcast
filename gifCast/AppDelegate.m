@@ -10,7 +10,6 @@
 #import "ScreenCaptureSession.h"
 #import "ScreenAreaSelector.h"
 #import "GifConverter.h"
-#import "DropboxManager.h"
 #import "GifViewer.h"
 
 @interface AppDelegate (){
@@ -19,7 +18,7 @@
     
     NSMenuItem *captureMenuItem;
     
-    DropboxManager* dropboxManager;
+  //  DropboxManager* dropboxManager;
     
     ScreenCaptureSession *captureSession;
 
@@ -136,7 +135,7 @@
         [captureSession stopRecording];
         
         //gif viewer
-        viewer = [[GifViewer alloc] initWithSettings:self.viewerWindow viewerImage:self.viewerImageView dropboxManager:dropboxManager progressBar:self.progressBar convertingTextField:self.convertingLabel];
+        viewer = [[GifViewer alloc] initWithSettings:self.viewerWindow viewerImage:self.viewerImageView  progressBar:self.progressBar convertingTextField:self.convertingLabel];
 
         NSLog(@"Created viewer");
         
@@ -245,13 +244,13 @@
 
 - (IBAction)linkDropboxAccount:(id)sender {
     
-    if (!dropboxManager){
+/*    if (!dropboxManager){
         
         dropboxManager = [[DropboxManager alloc]initSession:self];
     }
     
     [dropboxManager linkDropboxAcc:sender];
-    
+  */
 }
 
 
@@ -259,7 +258,7 @@
 //update dropbox link status
 -(void) updateLinkStatus:(BOOL)status{
 
-    [self.linkDropboxAccountButton setTitle: [NSString stringWithFormat:@"Dropbox Connected: %@", status ? @"YES" : @"NO"]];
+ //   [self.linkDropboxAccountButton setTitle: [NSString stringWithFormat:@"Dropbox Connected: %@", status ? @"YES" : @"NO"]];
 }
 - (IBAction)saveToDropboxAction:(id)sender {
     [viewer saveToDropbox];
