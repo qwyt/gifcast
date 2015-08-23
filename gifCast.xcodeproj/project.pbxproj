@@ -19,8 +19,8 @@
 		F6E036A91B80AB90007C687D /* SelectionRectangle.m in Sources */ = {isa = PBXBuildFile; fileRef = F6E036A81B80AB90007C687D /* SelectionRectangle.m */; };
 		F6ED735A1B89CFAD0038EE97 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6ED73591B89CFAD0038EE97 /* Quartz.framework */; };
 		F6ED735E1B89F3780038EE97 /* ffmpeg in Resources */ = {isa = PBXBuildFile; fileRef = F6ED735D1B89F3780038EE97 /* ffmpeg */; };
+		F6ED735F1B89F4110038EE97 /* DropboxOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6F7DB6C1B846FA500B336FF /* DropboxOSX.framework */; };
 		F6F7DAC41B845F1A00B336FF /* DropboxManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F7DAC31B845F1A00B336FF /* DropboxManager.m */; };
-		F6F7DB6D1B846FA500B336FF /* DropboxOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6F7DB6C1B846FA500B336FF /* DropboxOSX.framework */; };
 		F6F7DB6F1B846FBC00B336FF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6F7DB6E1B846FBC00B336FF /* Security.framework */; };
 		F6F7DB701B84702E00B336FF /* Security.framework in Resources */ = {isa = PBXBuildFile; fileRef = F6F7DB6E1B846FBC00B336FF /* Security.framework */; };
 		F6F7DB711B84703100B336FF /* DropboxOSX.framework in Resources */ = {isa = PBXBuildFile; fileRef = F6F7DB6C1B846FA500B336FF /* DropboxOSX.framework */; };
@@ -72,7 +72,7 @@
 			files = (
 				F6ED735A1B89CFAD0038EE97 /* Quartz.framework in Frameworks */,
 				F6F7DB6F1B846FBC00B336FF /* Security.framework in Frameworks */,
-				F6F7DB6D1B846FA500B336FF /* DropboxOSX.framework in Frameworks */,
+				F6ED735F1B89F4110038EE97 /* DropboxOSX.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
