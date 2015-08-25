@@ -128,7 +128,7 @@
             <value key="minSize" type="size" width="525" height="450"/>
             <view key="contentView" wantsLayer="YES" id="Hhm-Vc-ISJ">
                 <rect key="frame" x="0.0" y="-3" width="570" height="458"/>
-                <autoresizingMask key="autoresizingMask"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <button hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LWl-Va-y0O">
                         <rect key="frame" x="367" y="380" width="144" height="32"/>
@@ -141,23 +141,13 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P3u-tO-VpG">
-                        <rect key="frame" x="188" y="13" width="144" height="32"/>
-                        <buttonCell key="cell" type="push" title="Save locally" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fYM-Ui-B6n">
+                        <rect key="frame" x="367" y="13" width="144" height="32"/>
+                        <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fYM-Ui-B6n">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
                             <action selector="saveLocallyAction:" target="Voe-Tx-rLC" id="XXR-wX-g3g"/>
-                        </connections>
-                    </button>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uc9-Mm-hvL">
-                        <rect key="frame" x="23" y="13" width="144" height="32"/>
-                        <buttonCell key="cell" type="push" title="Discard" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Gsy-TK-kfk">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="viewerDiscardImage:" target="Voe-Tx-rLC" id="nvU-D1-sfN"/>
                         </connections>
                     </button>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BKd-yl-RKK">
@@ -173,8 +163,22 @@
                     </progressIndicator>
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="39B-bL-SGw">
                         <rect key="frame" x="20" y="61" width="530" height="377"/>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyUpOrDown" id="nm4-Bg-HeB"/>
+                        <shadow key="shadow" blurRadius="2">
+                            <size key="offset" width="1" height="0.0"/>
+                            <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </shadow>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" id="nm4-Bg-HeB"/>
                     </imageView>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uc9-Mm-hvL">
+                        <rect key="frame" x="49" y="13" width="144" height="32"/>
+                        <buttonCell key="cell" type="push" title="Close" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Gsy-TK-kfk">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="viewerDiscardImage:" target="Voe-Tx-rLC" id="nvU-D1-sfN"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <point key="canvasLocation" x="1559" y="-70"/>

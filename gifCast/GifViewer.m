@@ -60,16 +60,26 @@
     return self;
 }
 
--(void)showImage:(NSURL*)tempFile{
-    
-    [progressIndicator setHidden:YES];
-    [convertingText setHidden:YES];
+-(void)showImage:(NSImage*)image{
     
     [self -> imageView setHidden:NO];
     
     self -> tempFile = tempFile;
-    image = [[NSImage alloc]initWithContentsOfURL:tempFile];
+
+    
     [self -> imageView setImage:image];
+    [self -> imageView setAnimates:YES];
+    
+    [progressIndicator setHidden:YES];
+    [convertingText setHidden:YES];
+}
+
+//compress NSImage size
+-(NSImage *)imageCompressedByFactor:(NSImage*)image factor:(float)factor{
+    NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithData:[image TIFFRepresentation]];
+    NSDictionary *options = [NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:factor] forKey:NSImageCompressionFactor];
+    NSData *compressedData = [imageRep representationUsingType:NSJPEGFileType properties:options];
+    return [[NSImage alloc] initWithData:compressedData];
 }
 
 //called after viewer is closed and file is saved/uploaded/discarded

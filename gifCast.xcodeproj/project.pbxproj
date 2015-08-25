@@ -16,6 +16,7 @@
 		F65433741B89C526009F374D /* GifViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = F65433731B89C526009F374D /* GifViewer.m */; };
 		F67CAFD61B81C41500ED76B1 /* GifConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = F67CAFD51B81C41500ED76B1 /* GifConverter.m */; };
 		F6A62F521B7B49FA007165A9 /* ScreenAreaSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A62F511B7B49FA007165A9 /* ScreenAreaSelector.m */; };
+		F6BB5EB11B8C5779008FC3DB /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6BB5EB01B8C5779008FC3DB /* QTKit.framework */; };
 		F6E036A91B80AB90007C687D /* SelectionRectangle.m in Sources */ = {isa = PBXBuildFile; fileRef = F6E036A81B80AB90007C687D /* SelectionRectangle.m */; };
 		F6ED735A1B89CFAD0038EE97 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6ED73591B89CFAD0038EE97 /* Quartz.framework */; };
 		F6ED735E1B89F3780038EE97 /* ffmpeg in Resources */ = {isa = PBXBuildFile; fileRef = F6ED735D1B89F3780038EE97 /* ffmpeg */; };
@@ -54,6 +55,7 @@
 		F67CAFD51B81C41500ED76B1 /* GifConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GifConverter.m; sourceTree = "<group>"; };
 		F6A62F501B7B49FA007165A9 /* ScreenAreaSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenAreaSelector.h; sourceTree = "<group>"; };
 		F6A62F511B7B49FA007165A9 /* ScreenAreaSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenAreaSelector.m; sourceTree = "<group>"; };
+		F6BB5EB01B8C5779008FC3DB /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
 		F6E036A71B80AB90007C687D /* SelectionRectangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionRectangle.h; sourceTree = "<group>"; };
 		F6E036A81B80AB90007C687D /* SelectionRectangle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionRectangle.m; sourceTree = "<group>"; };
 		F6ED73591B89CFAD0038EE97 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
@@ -69,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6BB5EB11B8C5779008FC3DB /* QTKit.framework in Frameworks */,
 				F6ED735A1B89CFAD0038EE97 /* Quartz.framework in Frameworks */,
 				F6F7DB6F1B846FBC00B336FF /* Security.framework in Frameworks */,
 			);
@@ -87,6 +90,7 @@
 		F64865951B7788ED009211AC = {
 			isa = PBXGroup;
 			children = (
+				F6BB5EB01B8C5779008FC3DB /* QTKit.framework */,
 				F6ED73591B89CFAD0038EE97 /* Quartz.framework */,
 				F6F7DB6E1B846FBC00B336FF /* Security.framework */,
 				F6F7DB6C1B846FA500B336FF /* DropboxOSX.framework */,

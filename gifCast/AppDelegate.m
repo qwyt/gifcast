@@ -137,6 +137,7 @@
         //gif viewer
         viewer = [[GifViewer alloc] initWithSettings:self.viewerWindow viewerImage:self.viewerImageView  progressBar:self.progressBar convertingTextField:self.convertingLabel];
 
+        [self.saveLocallyButton setEnabled:NO]; //disable save button, while image is being converted
         NSLog(@"Created viewer");
         
         [viewer getResponseAfterCompletion:^(BOOL saveLocally){
@@ -206,8 +207,10 @@
             //Convert file async, wait till conversion is finished then call viewer.showImage
             dispatch_queue_t queue = dispatch_queue_create("com.gifCast.gifCast", NULL);
             dispatch_async(queue, ^{
-                [converter convert:file :^(NSURL *gifPath) {
-                    [viewer showImage:gifPath];
+                [converter convert:file :^(NSImage *convertedImage) {
+                    
+                    [self.saveLocallyButton setEnabled:YES];
+                    [viewer showImage:convertedImage];
                 }];
             });
             

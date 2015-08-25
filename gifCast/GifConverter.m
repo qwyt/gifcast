@@ -8,13 +8,16 @@
 
 #import "GifConverter.h"
 
+@import CoreServices;
+@import ImageIO;
+
 @implementation GifConverter{
     
     NSURL* tempFile;
     NSTask *task;
 }
 
--(void)convert : (NSURL*)file :(void (^)(NSURL* tempFile))finishBlock{
+-(void)convert : (NSURL*)file :(void (^)(NSImage* convertedImage))finishBlock{
 //   /Users/paulius/proj/gifCast/gifCast/ffmpeg/ffmpeg
     //make sure that we have ffmpeg
     
@@ -51,8 +54,8 @@
                   //        @"-2",
                           @"-i",
                           origin,
-                //          @"-vf",
-               //           @"scale=900:-1:sws_dither=ed",
+                          @"-vf",
+                          @"scale=300:-1:sws_dither=ed",
                           @"-y",
                           target]];
     
@@ -73,6 +76,7 @@
     
     tempFile = [[NSURL alloc]initWithString:target];
 
+    
     [self finishConversion];
 }
 
@@ -83,9 +87,20 @@
         NSLog(@"Still running");
 
     }
+
+    NSLog(@"completeConversionSession");
+
+    NSImage* image = [[NSImage alloc]initWithContentsOfURL:tempFile];
     
-    self.completeConversionSession(tempFile);
+    //    image = [self imageCompressedByFactor:image factor:4.0];
+    
+    [image setCacheMode:NSImageCacheAlways];
+    
+    self.completeConversionSession(image);
 }
+
+
+
 
 
 @end
