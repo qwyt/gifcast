@@ -14,6 +14,7 @@
 		F64865B81B7788ED009211AC /* gifCastTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F64865B71B7788ED009211AC /* gifCastTests.m */; };
 		F64865F81B77B2E1009211AC /* ScreenCaptureSession.m in Sources */ = {isa = PBXBuildFile; fileRef = F64865F71B77B2E1009211AC /* ScreenCaptureSession.m */; };
 		F65433741B89C526009F374D /* GifViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = F65433731B89C526009F374D /* GifViewer.m */; };
+		F667049B1B959DD400FA2843 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F667049A1B959DD400FA2843 /* WebKit.framework */; };
 		F67CAFD61B81C41500ED76B1 /* GifConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = F67CAFD51B81C41500ED76B1 /* GifConverter.m */; };
 		F6A62F521B7B49FA007165A9 /* ScreenAreaSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A62F511B7B49FA007165A9 /* ScreenAreaSelector.m */; };
 		F6BB5EB11B8C5779008FC3DB /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6BB5EB01B8C5779008FC3DB /* QTKit.framework */; };
@@ -51,6 +52,7 @@
 		F64865F71B77B2E1009211AC /* ScreenCaptureSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenCaptureSession.m; sourceTree = "<group>"; };
 		F65433721B89C526009F374D /* GifViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GifViewer.h; sourceTree = "<group>"; };
 		F65433731B89C526009F374D /* GifViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GifViewer.m; sourceTree = "<group>"; };
+		F667049A1B959DD400FA2843 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		F67CAFD41B81C41500ED76B1 /* GifConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GifConverter.h; sourceTree = "<group>"; };
 		F67CAFD51B81C41500ED76B1 /* GifConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GifConverter.m; sourceTree = "<group>"; };
 		F6A62F501B7B49FA007165A9 /* ScreenAreaSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenAreaSelector.h; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F667049B1B959DD400FA2843 /* WebKit.framework in Frameworks */,
 				F6BB5EB11B8C5779008FC3DB /* QTKit.framework in Frameworks */,
 				F6ED735A1B89CFAD0038EE97 /* Quartz.framework in Frameworks */,
 				F6F7DB6F1B846FBC00B336FF /* Security.framework in Frameworks */,
@@ -90,6 +93,7 @@
 		F64865951B7788ED009211AC = {
 			isa = PBXGroup;
 			children = (
+				F667049A1B959DD400FA2843 /* WebKit.framework */,
 				F6BB5EB01B8C5779008FC3DB /* QTKit.framework */,
 				F6ED73591B89CFAD0038EE97 /* Quartz.framework */,
 				F6F7DB6E1B846FBC00B336FF /* Security.framework */,

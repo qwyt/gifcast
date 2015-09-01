@@ -20,7 +20,7 @@
 }
 
 
-- (void)startRecording:(NSURL *)destPathOrig forRect:(NSRect)recordRect onFinish:(void (^)(NSURL* file))finishBlock
+- (void)startRecording:(NSURL *)destPathOrig forDisplay:(CGDirectDisplayID)displayId forRect:(NSRect)recordRect onFinish:(void (^)(NSURL* file))finishBlock
 {
     self.completeVideoSession = finishBlock;
     
@@ -40,7 +40,6 @@
     
     
     //select correct display TODO
-    CGDirectDisplayID displayId = kCGDirectMainDisplay;
     
     AVCaptureScreenInput *input = [[AVCaptureScreenInput alloc] initWithDisplayID:displayId];
     

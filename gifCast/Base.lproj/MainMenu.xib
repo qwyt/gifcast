@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
+        <plugIn identifier="com.apple.imagekit.ibplugin" version="7706"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -23,7 +24,7 @@
                 <outlet property="settingsWindow" destination="I7F-gA-5Eb" id="jn3-EO-1SF"/>
                 <outlet property="statusMenu" destination="2eL-2T-Uvq" id="bgf-pd-EkS"/>
                 <outlet property="stopCaptureMenuItem" destination="7zH-js-EIg" id="1sw-Dh-7DG"/>
-                <outlet property="viewerImageView" destination="39B-bL-SGw" id="cqJ-79-OGE"/>
+                <outlet property="viewerImageView" destination="Cx5-wv-El1" id="xef-y2-qO9"/>
                 <outlet property="viewerWindow" destination="fcL-Ea-A0E" id="emZ-Iu-Bzi"/>
             </connections>
         </customObject>
@@ -124,7 +125,7 @@
             <windowStyleMask key="styleMask" titled="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="415" y="203" width="570" height="458"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <value key="minSize" type="size" width="525" height="450"/>
             <view key="contentView" wantsLayer="YES" id="Hhm-Vc-ISJ">
                 <rect key="frame" x="0.0" y="-3" width="570" height="458"/>
@@ -161,14 +162,6 @@
                     <progressIndicator fixedFrame="YES" maxValue="100" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="oKA-Rm-REY">
                         <rect key="frame" x="269" y="266" width="32" height="32"/>
                     </progressIndicator>
-                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="39B-bL-SGw">
-                        <rect key="frame" x="20" y="61" width="530" height="377"/>
-                        <shadow key="shadow" blurRadius="2">
-                            <size key="offset" width="1" height="0.0"/>
-                            <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                        </shadow>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" id="nm4-Bg-HeB"/>
-                    </imageView>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uc9-Mm-hvL">
                         <rect key="frame" x="49" y="13" width="144" height="32"/>
                         <buttonCell key="cell" type="push" title="Close" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Gsy-TK-kfk">
@@ -179,6 +172,10 @@
                             <action selector="viewerDiscardImage:" target="Voe-Tx-rLC" id="nvU-D1-sfN"/>
                         </connections>
                     </button>
+                    <ikImageView wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cx5-wv-El1">
+                        <rect key="frame" x="20" y="61" width="530" height="377"/>
+                        <color key="backgroundColor" red="0.99484536082474229" green="0.98969072164948457" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </ikImageView>
                 </subviews>
             </view>
             <point key="canvasLocation" x="1559" y="-70"/>

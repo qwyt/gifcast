@@ -17,7 +17,7 @@
     NSTask *task;
 }
 
--(void)convert : (NSURL*)file :(void (^)(NSImage* convertedImage))finishBlock{
+-(void)convert : (NSURL*)file :(void (^)(NSURL* convertedImage))finishBlock{
 //   /Users/paulius/proj/gifCast/gifCast/ffmpeg/ffmpeg
     //make sure that we have ffmpeg
     
@@ -90,13 +90,8 @@
 
     NSLog(@"completeConversionSession");
 
-    NSImage* image = [[NSImage alloc]initWithContentsOfURL:tempFile];
     
-    //    image = [self imageCompressedByFactor:image factor:4.0];
-    
-    [image setCacheMode:NSImageCacheAlways];
-    
-    self.completeConversionSession(image);
+    self.completeConversionSession(tempFile);
 }
 
 

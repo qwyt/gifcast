@@ -65,7 +65,7 @@
 //----
 
 
-- (void)getRecordingAreaRect: (BOOL)fullScreen :(void (^)(NSRect rect))finishBlock{
+- (void)getRecordingAreaRect: (BOOL)fullScreen :(void (^)(NSRect rect, CGDirectDisplayID displayId))finishBlock{
 
     NSLog(@"startSelection:ScreenAreaSelector");
     
@@ -73,17 +73,20 @@
     
     if(fullScreen){
         
-        self.completeRecordingAreaSelection( [[NSScreen mainScreen] frame] );
+        self.completeRecordingAreaSelection( [[NSScreen mainScreen] frame], CGMainDisplayID() );
+                                            
         return;
     }
     
     __block NSRect selectedRect;
+    __block CGDirectDisplayID selectedDisplay;
     
-    [selector getRectAfterSelection:^(NSRect rect) {
-                
+    [selector getRectAfterSelection:^(NSRect rect, CGDirectDisplayID display) {
+        
+        selectedDisplay = display;
         selectedRect = rect;
         
-        self.completeRecordingAreaSelection(selectedRect);
+        self.completeRecordingAreaSelection(selectedRect, selectedDisplay);
         [selector removeFromSuperview];
         
     }];

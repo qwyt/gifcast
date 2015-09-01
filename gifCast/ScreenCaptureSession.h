@@ -16,8 +16,7 @@ typedef void (^CompleteVideoSession)(NSURL* file);
 @property (copy, nonatomic) CompleteVideoSession completeVideoSession;
 
 
-- (void)startRecording:(NSURL *)destPath forRect:(NSRect)recordRect onFinish:(void (^)(NSURL* file))finishBlock;
-
+- (void)startRecording:(NSURL *)destPathOrig forDisplay:(CGDirectDisplayID)displayId forRect:(NSRect)recordRect onFinish:(void (^)(NSURL* file))finishBlock;
 
 - (void)stopRecording;
 

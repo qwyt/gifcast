@@ -13,6 +13,7 @@
     
     NSColor* backgroundColor;
     NSRect currentRect;
+    CGDirectDisplayID currentDisplay;
 }
 
 
@@ -27,7 +28,7 @@
     return self;
 }
 
-- (void)getRectAfterSelection:(void (^)(NSRect rect))finishBlock{
+- (void)getRectAfterSelection:(void (^)(NSRect rect, CGDirectDisplayID display))finishBlock{
     self.completeRectSelection = finishBlock;
 }
 
@@ -69,6 +70,11 @@
     NSLog(@"mouseDown:SelectionRectangle");
     
     self.startPoint = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+    
+    NSScreen *screen = [[theEvent window] screen];
+        
+    NSNumber* screenID = [ [screen deviceDescription] objectForKey:@"NSScreenNumber"];
+    CGDirectDisplayID currentDisplay = [screenID unsignedIntValue];
     
     // create and configure shape layer
     
@@ -136,7 +142,7 @@
     
     [self setNeedsDisplay:YES];
     
-    self.completeRectSelection(resultRect);
+    self.completeRectSelection(resultRect, currentDisplay);
 }
 
 

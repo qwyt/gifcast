@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import <QuartzCore/QuartzCore.h>
 
-typedef void (^CompleteRectSelection)(NSRect rect);
+typedef void (^CompleteRectSelection)(NSRect rect, CGDirectDisplayID display);
 
 @interface SelectionRectangle : NSView
 
@@ -23,6 +23,6 @@ typedef void (^CompleteRectSelection)(NSRect rect);
 
 @property (copy, nonatomic) CompleteRectSelection completeRectSelection;
 
-- (void)getRectAfterSelection:(void (^)(NSRect rect))finishBlock;
+- (void)getRectAfterSelection:(void (^)(NSRect rect, CGDirectDisplayID display))finishBlock;
 
 @end

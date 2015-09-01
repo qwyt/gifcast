@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
 
-typedef void (^CompleteRecordingAreaSelection)(NSRect rect);
+typedef void (^CompleteRecordingAreaSelection)(NSRect rect, CGDirectDisplayID displayId);
 
 
 
@@ -27,7 +27,7 @@ typedef void (^CompleteRecordingAreaSelection)(NSRect rect);
 
 @property (copy, nonatomic) CompleteRecordingAreaSelection completeRecordingAreaSelection;
 
-- (void)getRecordingAreaRect:(BOOL)fullScreen:(void (^)(NSRect rect))finishBlock;
+- (void)getRecordingAreaRect:(BOOL)fullScreen:(void (^)(NSRect rect, CGDirectDisplayID displayId))finishBlock;
 
 
 @end

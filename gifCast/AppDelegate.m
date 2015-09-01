@@ -12,6 +12,7 @@
 #import "GifConverter.h"
 #import "GifViewer.h"
 
+
 @interface AppDelegate (){
     
     ScreenAreaSelector* screenAreaSelector;
@@ -52,6 +53,12 @@
     [self.settingsWindow orderOut:self];
 
 }
+
+-(void)awakeFromNib
+{
+    [self.viewerImageView setImageWithURL:nil];
+}
+
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
     // Insert code here to tear down your application
@@ -94,6 +101,8 @@
 -(void)prepareCaptureSessionGeneric:(id)sender :(BOOL)fullScreen{
     
 
+    
+    
     if( captureMenuItem == nil)
         captureMenuItem = (NSMenuItem*) sender; //save button
 
@@ -167,6 +176,8 @@
     
     capturing = YES;
     
+    
+    
     screenAreaSelector =  [[ScreenAreaSelector alloc]initSession:saveURL];
     
     //enable stopRecordingMenu + set up actions
@@ -178,7 +189,7 @@
     [self.captureMenuHolder setEnabled:NO];
     
     //wait untill recording rect is selected then start recording
-    [screenAreaSelector getRecordingAreaRect:fullScreen :^(NSRect rect) {
+    [screenAreaSelector getRecordingAreaRect:fullScreen :^(NSRect rect, CGDirectDisplayID displayId) {
         
         NSLog(@"WWWWWW -   WWWWW   _  WWWWWW %@", NSStringFromRect(rect));
         [screenAreaSelector close];
@@ -187,7 +198,7 @@
         
         
         //create a recording session, procces file on completion
-        [captureSession startRecording:saveURL forRect:rect onFinish:^(NSURL *file) {
+        [captureSession startRecording:saveURL forDisplay:displayId forRect:rect onFinish:^(NSURL *file) {
             
             NSLog(@"@video recorded, saved at : %@ ", [file absoluteString]);
             
@@ -202,15 +213,21 @@
             }
             
             GifConverter *converter = [[GifConverter alloc]init];
-            
+                    
             
             //Convert file async, wait till conversion is finished then call viewer.showImage
             dispatch_queue_t queue = dispatch_queue_create("com.gifCast.gifCast", NULL);
+            
             dispatch_async(queue, ^{
-                [converter convert:file :^(NSImage *convertedImage) {
+                [converter convert:file :^(NSURL *convertedImage) {
                     
-                    [self.saveLocallyButton setEnabled:YES];
-                    [viewer showImage:convertedImage];
+                    //only do UI stuff on main thread:
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                       
+                        [self.saveLocallyButton setEnabled:YES];
+                        [viewer showImage:convertedImage];
+                        
+                    });
                 }];
             });
             

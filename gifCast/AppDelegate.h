@@ -7,6 +7,7 @@
 //
 #import <Cocoa/Cocoa.h>
 @import Quartz;
+@import WebKit;
 
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
@@ -38,10 +39,10 @@
 
 // viewer (save menu)
 @property (weak) IBOutlet NSWindow *viewerWindow;
-@property (weak) IBOutlet NSImageView *viewerImageView;
+@property (weak) IBOutlet IKImageView *viewerImageView;
 @property (weak) IBOutlet NSButton *saveToDropboxButton;
 @property (weak) IBOutlet NSButton *saveLocallyButton;
-
+//
 - (IBAction)saveToDropboxAction:(id)sender;
 - (IBAction)saveLocallyAction:(id)sender;
 - (IBAction)viewerDiscardImage:(id)sender;
