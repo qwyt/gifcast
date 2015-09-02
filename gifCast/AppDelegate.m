@@ -111,11 +111,6 @@
     
     //create temp file
     
-//    NSString* tempDir = NSTemporaryDirectory();
-//    NSURL* tempFile = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"file:/%@%@", tempDir, @"tempfile.mov"]];
-//     NSURL* tempFile = [[NSURL alloc]initWithString:@"/Users/paulius/temp/tempfile.mov"];
-    
-    
     //just save in supporting files, because temp dir thing always gets fucked up.. after some time (wtf...)
     NSString *tempFile = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"tempFile.mov"];
     

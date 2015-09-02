@@ -8,22 +8,31 @@
 
 #import "SelectionRectangle.h"
 #import <QuartzCore/QuartzCore.h>
+#import "SelectionView.h"
 
 @implementation SelectionRectangle{
     
     NSColor* backgroundColor;
     NSRect currentRect;
     CGDirectDisplayID currentDisplay;
+    NSMutableArray* selectionViews;
+    
+    //currently selected view
+    SelectionView* currentView;
 }
 
 
-- (id)initSelector:(NSRect)viewRect{
+- (id)initSelector{
     
-    self = [super initWithFrame:viewRect];
+    self = [super init];
+
+    for( NSScreen *display in [NSScreen screens ]){
+        
+        SelectionView selView = Selection
+        
+    }
     
-    [self setWantsLayer:YES];
-    
-    backgroundColor = [NSColor blueColor];
+    //create a selectionView for each display
     
     return self;
 }
@@ -43,10 +52,10 @@
     
     // Drawing code
     [backgroundColor setFill];
-    CGContextFillRect(context, self.bounds);
+    CGContextFillRect(context, currentView.bounds);
 
     
-    // clear the background in the given rectangle
+   // clear the background in the given rectangle
     
   //  currentRect = NSMakeRect(500.0, 333.0, 222.0, 444.0);
     
@@ -69,7 +78,7 @@
 {
     NSLog(@"mouseDown:SelectionRectangle");
     
-    self.startPoint = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+    currentView.startPoint = [currentView convertPoint:[theEvent locationInWindow] fromView:nil];
     
     NSScreen *screen = [[theEvent window] screen];
         
@@ -78,12 +87,12 @@
     
     // create and configure shape layer
     
-    self.shapeLayer = [CAShapeLayer layer];
-    self.shapeLayer.lineWidth = 1.0;
-    self.shapeLayer.strokeColor = [[NSColor blackColor] CGColor];
-    self.shapeLayer.fillColor = [[NSColor clearColor] CGColor];
-    self.shapeLayer.lineDashPattern = @[@10, @5];
-    [self.layer addSublayer:self.shapeLayer];
+    currentView.shapeLayer = [CAShapeLayer layer];
+    currentView.shapeLayer.lineWidth = 1.0;
+    currentView.shapeLayer.strokeColor = [[NSColor blackColor] CGColor];
+    currentView.shapeLayer.fillColor = [[NSColor clearColor] CGColor];
+    currentView.shapeLayer.lineDashPattern = @[@10, @5];
+    [currentView.layer addSublayer:currentView.shapeLayer];
     
     // create animation for the layer
     
@@ -93,7 +102,7 @@
     [dashAnimation setToValue:@15.0f];
     [dashAnimation setDuration:0.75f];
     [dashAnimation setRepeatCount:HUGE_VALF];
-    [self.shapeLayer addAnimation:dashAnimation forKey:@"linePhase"];
+    [currentView.shapeLayer addAnimation:dashAnimation forKey:@"linePhase"];
     
     //set currentRect origin
     currentRect = NSMakeRect(theEvent.locationInWindow.x, theEvent.locationInWindow.x, 0, 0);
@@ -104,29 +113,30 @@
 {
  //    NSLog(@"mouseDragged:SelectionRectangle");
     
-    NSPoint point = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+    
+    NSPoint point = [currentView convertPoint:[theEvent locationInWindow] fromView:nil];
     
     // create path for the shape layer
     
     CGMutablePathRef path = CGPathCreateMutable();
-    CGPathMoveToPoint(path, NULL, self.startPoint.x, self.startPoint.y);
-    CGPathAddLineToPoint(path, NULL, self.startPoint.x, point.y);
+    CGPathMoveToPoint(path, NULL, currentView.startPoint.x, currentView.startPoint.y);
+    CGPathAddLineToPoint(path, NULL, currentView.startPoint.x, point.y);
     CGPathAddLineToPoint(path, NULL, point.x, point.y);
-    CGPathAddLineToPoint(path, NULL, point.x, self.startPoint.y);
+    CGPathAddLineToPoint(path, NULL, point.x, currentView.startPoint.y);
     CGPathCloseSubpath(path);
     
     // set the shape layer's path
     
-    self.shapeLayer.path = path;
+    currentView.shapeLayer.path = path;
     
     CGPathRelease(path);
     
     // save current rect for cutout thing
   //  currentRect = NSMakeRect(currentRect.origin.x, currentRect.origin.y, theEvent.locationInWindow.x,  theEvent.locationInWindow.y);
     
-    currentRect =  CGPathGetBoundingBox([self.shapeLayer path]);
+    currentRect =  CGPathGetBoundingBox([currentView.shapeLayer path]);
     
-    [self setNeedsDisplay:YES];
+    [currentView setNeedsDisplay:YES];
      //   [self dr]
 }
 
@@ -134,16 +144,17 @@
 {
     NSLog(@"mouseUp:SelectionRectangle");
     
-    [self.shapeLayer removeFromSuperlayer];
-    self.shapeLayer = nil;
+    [currentView.shapeLayer removeFromSuperlayer];
+    currentView.shapeLayer = nil;
     
     NSRect resultRect = currentRect;
     currentRect = NSMakeRect(0,0,0,0);
     
-    [self setNeedsDisplay:YES];
+    [currentView setNeedsDisplay:YES];
     
-    self.completeRectSelection(resultRect, currentDisplay);
+    currentView.completeRectSelection(resultRect, currentDisplay);
 }
 
 
 @end
+

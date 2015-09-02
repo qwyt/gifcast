@@ -11,12 +11,9 @@
 
 typedef void (^CompleteRectSelection)(NSRect rect, CGDirectDisplayID display);
 
-@interface SelectionRectangle : NSView
+@interface SelectionRectangle : NSObject
 
-@property (nonatomic) NSPoint startPoint;
-@property (nonatomic, strong) CAShapeLayer *shapeLayer;
 
-- (id)initSelector:(NSRect)viewRect;
 
 
 // Completion Handler for rect selection, is executed after you select rect:

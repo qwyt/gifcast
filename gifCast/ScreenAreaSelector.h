@@ -13,7 +13,7 @@ typedef void (^CompleteRecordingAreaSelection)(NSRect rect, CGDirectDisplayID di
 
 
 
-@interface ScreenAreaSelector: NSWindow  <NSWindowDelegate> 
+@interface ScreenAreaSelector
 {
 
 }
