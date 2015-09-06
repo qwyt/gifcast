@@ -36,10 +36,12 @@
     // Create a capture session
     mSession = [[AVCaptureSession alloc] init];
     
-    mSession.sessionPreset = AVCaptureSessionPresetPhoto;
+ //   mSession.sessionPreset = AVCaptureSessionPresetHigh;
     
     
     //select correct display TODO
+    
+    NSLog(@"startRecording: display: %d", displayId);
     
     AVCaptureScreenInput *input = [[AVCaptureScreenInput alloc] initWithDisplayID:displayId];
     
@@ -55,8 +57,11 @@
     
     // Create a MovieFileOutput and add it to the session
     mMovieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
+    
     if ([mSession canAddOutput:mMovieFileOutput])
         [mSession addOutput:mMovieFileOutput];
+    else
+        [NSException raise:@"Can't add Output! " format:@"   "];
     
     [mSession startRunning];
     
@@ -75,6 +80,8 @@
     // Start recording to the destination movie file
     // The destination path is assumed to end with ".mov", for example, @"/users/master/desktop/capture.mov"
     // Set the recording delegate to self
+    
+    
     [mMovieFileOutput startRecordingToOutputFileURL:destPath recordingDelegate:self];
 
     

@@ -84,7 +84,7 @@
     
     while (task.isRunning) {
         [NSThread sleepForTimeInterval:0.1f];
-        NSLog(@"Still running");
+    //    NSLog(@"Still running");
 
     }
 

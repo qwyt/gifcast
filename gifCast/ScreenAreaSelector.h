@@ -13,7 +13,7 @@ typedef void (^CompleteRecordingAreaSelection)(NSRect rect, CGDirectDisplayID di
 
 
 
-@interface ScreenAreaSelector
+@interface ScreenAreaSelector : NSObject 
 {
 
 }
@@ -21,7 +21,7 @@ typedef void (^CompleteRecordingAreaSelection)(NSRect rect, CGDirectDisplayID di
 @property (nonatomic) NSPoint startPoint;
 @property (nonatomic, strong) CAShapeLayer *shapeLayer;
 
-- (id)initSession:(NSURL*) file;
+- (id)initSession:(NSURL*)file fullScreen:(BOOL)fullScreen;
 
 // Completion Handler for rect selection, is executed after you select rect:
 

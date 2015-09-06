@@ -9,6 +9,14 @@
 #import <QuartzCore/QuartzCore.h>
 #import "ScreenAreaSelector.h"
 #import "SelectionRectangle.h"
+#import "AppDelegate.h"
+
+// ----
+// Used for communication between AppDelegate and SelectionRectangle
+// owns SelectionRectangle
+//
+// TODO: merge class with SelectionRectangle
+// ----
 
 @import AppKit;
 
@@ -26,40 +34,13 @@
 
 }
 
-- (id)initSession:(NSURL*) file
+- (id)initSession:(NSURL*) file fullScreen:(BOOL)fullScreen
 {
-
-    CGRect viewRect =  [[NSScreen mainScreen] frame];
     
-    
-    self = [super initWithContentRect:viewRect styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:NO];
-    if ( self ) {
-        //  [self setBackgroundColor:[NSColor blueColor]];
-          [self makeKeyAndOrderFront:NSApp];
-          [self setOpaque:NO]; // Needed so we can see through it when we have clear stuff on top
-      //  [self setHasShadow:YES];
-        //[self setLevel:NSFloatingWindowLevel]; // Let's make it sit on top of everything else
-          [self setAlphaValue:0.2]; // It'll start out mostly transparent
-        
-        
-        
-        //create view
-        
-        
-        selector = [[SelectionRectangle alloc]initSelector:viewRect];
-        
-        NSLog(@" viewRect: %@", NSStringFromRect(viewRect));
-        
-        
-        [self.contentView addSubview:selector];
-        // set any NSColor for filling, say white:
-        [self makeFirstResponder:selector];
-        
+    //selector is currently used for managing NSSwindows used for drawing selector, no need for fullscreen (ATM)
+    if (!fullScreen) {
+        selector = [[SelectionRectangle alloc] initSelectionRectangle];
     }
-    
-    
-    NSLog(@"init:ScreenAreaSelector");
-    
     return self;
 }
 //----
@@ -73,7 +54,12 @@
     
     if(fullScreen){
         
-        self.completeRecordingAreaSelection( [[NSScreen mainScreen] frame], CGMainDisplayID() );
+        NSScreen* cScreen = [AppDelegate getCurrentMouseScreen];
+        
+        CGDirectDisplayID screenID = [[[cScreen deviceDescription] objectForKey:@"NSScreenNumber"] unsignedIntValue];
+        
+        NSLog(@"startSelection:fullScreen");
+        self.completeRecordingAreaSelection( [cScreen frame], screenID );
                                             
         return;
     }
@@ -81,13 +67,14 @@
     __block NSRect selectedRect;
     __block CGDirectDisplayID selectedDisplay;
     
+    NSLog(@"startSelection:getRectAfterSelection");
     [selector getRectAfterSelection:^(NSRect rect, CGDirectDisplayID display) {
         
         selectedDisplay = display;
         selectedRect = rect;
         
         self.completeRecordingAreaSelection(selectedRect, selectedDisplay);
-        [selector removeFromSuperview];
+       
         
     }];
     

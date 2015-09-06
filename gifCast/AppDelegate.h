@@ -7,7 +7,6 @@
 //
 #import <Cocoa/Cocoa.h>
 @import Quartz;
-@import WebKit;
 
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
@@ -49,6 +48,10 @@
 //
 @property (weak) IBOutlet NSProgressIndicator *progressBar;
 @property (weak) IBOutlet NSTextField *convertingLabel;
+
+
+//static:
++ (NSScreen*)getCurrentMouseScreen;
 
 @end
 

@@ -172,8 +172,8 @@
     capturing = YES;
     
     
+    screenAreaSelector =  [[ScreenAreaSelector alloc]initSession:saveURL fullScreen:fullScreen];
     
-    screenAreaSelector =  [[ScreenAreaSelector alloc]initSession:saveURL];
     
     //enable stopRecordingMenu + set up actions
     [self.stopCaptureMenuItem setHidden:NO];
@@ -186,8 +186,8 @@
     //wait untill recording rect is selected then start recording
     [screenAreaSelector getRecordingAreaRect:fullScreen :^(NSRect rect, CGDirectDisplayID displayId) {
         
-        NSLog(@"WWWWWW -   WWWWW   _  WWWWWW %@", NSStringFromRect(rect));
-        [screenAreaSelector close];
+        NSLog(@"AppDelegate: rect & display %@  |  %d", NSStringFromRect(rect), displayId);
+   //     [screenAreaSelector close];
         
         captureSession = [[ScreenCaptureSession alloc]init];
         
@@ -285,5 +285,20 @@
 
 - (IBAction)viewerDiscardImage:(id)sender{
     [viewer discard];
+}
+
+
+//current screen, used for clicks etc..
++ (NSScreen*)getCurrentMouseScreen{
+    
+    NSPoint mouseLoc = [NSEvent mouseLocation];
+    NSEnumerator *screenEnum = [[NSScreen screens] objectEnumerator];
+    NSScreen *screen;
+    while ((screen = [screenEnum nextObject]) && !NSMouseInRect(mouseLoc,
+                                                                [screen frame], NO));
+    
+    NSLog(@"CURRENT MOUSE SCREEN:    %d", [[[screen deviceDescription] objectForKey:@"NSScreenNumber"] unsignedIntValue]);
+    
+    return screen;
 }
 @end
